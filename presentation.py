@@ -7,26 +7,33 @@ class Menu(object):
         self.root = Tk()
         self.root.title('Calculator')
 
-        self.count = Count()
+        self.c = Count()
 
         # screen
-        self.l_screen = Label(self.root, text="0").\
-            grid(row=0, column=0, rowspan=2, columnspan=4)
+        self.l_screen = Label(self.root, text="")
+        self.l_screen.grid(row=0, column=0, rowspan=2, columnspan=4)
 
         # buttons
         # numbers
-        Button(text='0', command=lambda *args: self.count.add_value('0')).grid(row=6, column=0)
+        Button(text='0', command=lambda *args: self.print_number('0')).grid(row=6, column=0)
         number = 1
         for i in xrange(5, 2, -1):
             for j in xrange(0, 3):
                 Button(text=str(number),
-                    command=lambda number=number: self.count.add_value(number)).grid(row=i, column=j)
+                    command=lambda number=number: self.print_number(number)).grid(row=i, column=j)
                 number += 1
 
         # others
-        Button(text='=', padx=10, command=self.count.evaluate_count).grid(row=6, column=2, columnspan=2)
+        Button(text='=', padx=10, command=self.print_result).grid(row=6, column=2, columnspan=2)
         for name in SYMBOLS:
-            Button(text=name, command=lambda name=name: self.count.add_value(name)).\
+            Button(text=name, command=lambda name=name: self.c.add_value(name)).\
                     grid(row=SYMBOLS[name][0], column=SYMBOLS[name][1])
 
         self.root.mainloop()
+
+    def print_number(self, number):
+        self.l_screen['text'] = number
+        self.c.add_value(number)
+
+    def print_result(self):
+        self.l_screen['text'] = self.c.evaluate_count()
