@@ -27,13 +27,13 @@ class Menu(object):
         # others
         symb = '='
         Button(text=symb, padx=30, command=self.equal).\
-            grid(row=SYMBOLS[symb][0], column=SYMBOLS[symb][1], columnspan=2)
+            grid(row=SPECIAL[symb][0], column=SPECIAL[symb][1], columnspan=2)
         symb = 'AC'
         Button(text=symb, command=self.ac).\
-            grid(row=SYMBOLS[symb][0], column=SYMBOLS[symb][1])
-        for name in OPERATORS:
+            grid(row=SPECIAL[symb][0], column=SPECIAL[symb][1])
+        for name in SYMBOLS:
             Button(text=name, command=lambda name=name: self.print_number(name)).\
-                    grid(row=OPERATORS[name][0], column=OPERATORS[name][1])
+                    grid(row=SYMBOLS[name][0], column=SYMBOLS[name][1])
 
         self.root.mainloop()
 
