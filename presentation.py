@@ -37,6 +37,14 @@ class Menu(object):
 
         self.root.mainloop()
 
+    def print_number(self, number):
+        number = str(number)
+        #print self.l_screen['text'], type(self.l_screen['text']), type(number)
+        if self.c.count == '':
+            self.clear_screen()
+        self.l_screen['text'] += number
+        self.c.add_value(number)
+
     def equal(self):
         self.clear_screen()
         self.print_result()
@@ -46,14 +54,9 @@ class Menu(object):
         self.clear_screen()
         self.c.clear_count()
 
+    # Auxiliary methods
     def clear_screen(self):
         self.l_screen['text'] = ''
-
-    def print_number(self, number):
-        number = str(number)
-        #print self.l_screen['text'], type(self.l_screen['text']), type(number)
-        self.l_screen['text'] += number
-        self.c.add_value(number)
 
     def print_result(self):
         self.l_screen['text'] = str(self.c.evaluate_count())
