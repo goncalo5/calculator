@@ -2,6 +2,7 @@ from Tkinter import *
 from constants import *
 from logic import Count
 
+
 class Menu(object):
     def __init__(self):
         self.root = Tk()
@@ -25,7 +26,7 @@ class Menu(object):
         for i in xrange(5, 2, -1):
             for j in xrange(0, 3):
                 Button(text=str(number),
-                    command=lambda number=number: self.print_value(number)).grid(row=i, column=j)
+                       command=lambda number=number: self.print_value(number)).grid(row=i, column=j)
                 number = int(number)
                 number += 1
 
@@ -63,6 +64,8 @@ class Menu(object):
         if self.c.count == '':
             self.clear_screen()
         self.l_screen['text'] += value
+        if value == '/':
+            value = '*1./'
         self.c.add_value(value)
 
     def equal(self):
