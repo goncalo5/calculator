@@ -6,6 +6,7 @@ class Count(object):
         self.count += str(value)
 
     def evaluate_count(self):
+        #print self.count, type(self.count)
         result = eval(self.count)
         return result
 
