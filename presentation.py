@@ -25,8 +25,12 @@ class Menu(object):
                 number += 1
 
         # others
-        Button(text='=', padx=30, command=self.equal).\
-            grid(row=SYMBOLS['='][0], column=SYMBOLS['='][1], columnspan=2)
+        symb = '='
+        Button(text=symb, padx=30, command=self.equal).\
+            grid(row=SYMBOLS[symb][0], column=SYMBOLS[symb][1], columnspan=2)
+        symb = 'AC'
+        Button(text=symb, command=self.ac).\
+            grid(row=SYMBOLS[symb][0], column=SYMBOLS[symb][1])
         for name in OPERATORS:
             Button(text=name, command=lambda name=name: self.print_number(name)).\
                     grid(row=OPERATORS[name][0], column=OPERATORS[name][1])
@@ -38,12 +42,16 @@ class Menu(object):
         self.print_result()
         self.c.clear_count()
 
+    def ac(self):
+        self.clear_screen()
+        self.c.clear_count()
+
     def clear_screen(self):
         self.l_screen['text'] = ''
 
     def print_number(self, number):
         number = str(number)
-        print self.l_screen['text'], type(self.l_screen['text']), type(number)
+        #print self.l_screen['text'], type(self.l_screen['text']), type(number)
         self.l_screen['text'] += number
         self.c.add_value(number)
 
