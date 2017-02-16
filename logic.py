@@ -7,5 +7,7 @@ class Count(object):
 
     def evaluate_count(self):
         result = eval(self.count)
-        self.count = ''
         return result
+
+    def clear_count(self):
+        self.count = ''

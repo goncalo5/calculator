@@ -21,19 +21,31 @@ class Menu(object):
             for j in xrange(0, 3):
                 Button(text=str(number),
                     command=lambda number=number: self.print_number(number)).grid(row=i, column=j)
+                number = int(number)
                 number += 1
 
         # others
-        Button(text='=', padx=10, command=self.print_result).grid(row=6, column=2, columnspan=2)
-        for name in SYMBOLS:
-            Button(text=name, command=lambda name=name: self.c.add_value(name)).\
-                    grid(row=SYMBOLS[name][0], column=SYMBOLS[name][1])
+        Button(text='=', padx=30, command=self.equal).\
+            grid(row=SYMBOLS['='][0], column=SYMBOLS['='][1], columnspan=2)
+        for name in OPERATORS:
+            Button(text=name, command=lambda name=name: self.print_number(name)).\
+                    grid(row=OPERATORS[name][0], column=OPERATORS[name][1])
 
         self.root.mainloop()
 
+    def equal(self):
+        self.clear_screen()
+        self.print_result()
+        self.c.clear_count()
+
+    def clear_screen(self):
+        self.l_screen['text'] = ''
+
     def print_number(self, number):
-        self.l_screen['text'] = number
+        number = str(number)
+        print self.l_screen['text'], type(self.l_screen['text']), type(number)
+        self.l_screen['text'] += number
         self.c.add_value(number)
 
     def print_result(self):
-        self.l_screen['text'] = self.c.evaluate_count()
+        self.l_screen['text'] = str(self.c.evaluate_count())
